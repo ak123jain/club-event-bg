@@ -18,7 +18,7 @@ export const createWaitlist = async (req, res) => {
           return res.status(409).json({ message: 'Email already joined the waitlist' });
         }
     
-        const saved = await Waitlist.create({ email });
+        const saved = await User.create({ email });
         res.status(201).json({ message: 'Successfully joined the waitlist', data: saved });
     
       } catch (error) {
