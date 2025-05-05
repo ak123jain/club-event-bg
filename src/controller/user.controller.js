@@ -6,7 +6,7 @@
 // POST /api/waitlist
 export const createWaitlist = async (req, res) => {
     try {
-        const { email } = req.body;
+        const { email,name,phoneNumber } = req.body;
     
         if (!email || !email.includes('@')) {
           return res.status(400).json({ message: 'Invalid email' });
@@ -18,7 +18,7 @@ export const createWaitlist = async (req, res) => {
           return res.status(409).json({ message: 'Email already joined the waitlist' });
         }
     
-        const saved = await User.create({ email });
+        const saved = await User.create({ email, name, phoneNumber });
         res.status(201).json({ message: 'Successfully joined the waitlist', data: saved });
     
       } catch (error) {
