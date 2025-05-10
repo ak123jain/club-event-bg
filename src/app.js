@@ -17,7 +17,12 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 import userRoutes from "./Routes/user.route.js"
+import clubRoutes from "./Routes/club.route.js"
+import eventRoutes from "./Routes/event.route.js"
+
 
 app.use("/user", userRoutes)
+app.use("/club", clubRoutes)
+app.use("/event", eventRoutes)
 
 export { app }
