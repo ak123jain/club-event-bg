@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { Club } from "../models/club.models.js";
+import { User } from "../models/user.models.js";
 
 export const addclub = asynchandler(async (req, res) => {
 
@@ -10,8 +11,6 @@ export const addclub = asynchandler(async (req, res) => {
     console.log("req user" , req.file);
     
     
-
-
     if (!req.user) {
         throw new ApiError(400, " userbis not logged in is required");
     }
@@ -33,10 +32,11 @@ export const addclub = asynchandler(async (req, res) => {
         throw new ApiError(400, "All fields (name, description, sociallink) are required");
     }
 
-    const file = req.file?.buffer || null;
+    const file = req.file?.path || null;
 
     console.log( "req file ka andar" ,  file);
     
+      
 
     const clubphoto = await uploadOnCloudinary(file);
 
@@ -53,6 +53,12 @@ export const addclub = asynchandler(async (req, res) => {
         clubphoto: clubphoto?.url || null,
         admin: req.user._id,
     });
+
+     await User.findByIdAndUpdate(
+        userid,
+        { club: newclub._id },
+        { new: true } // returns the updated doc (optional)
+    );
 
     res.status(200).json(new ApiResponse(200, newclub, "club created"));
 
@@ -108,4 +114,22 @@ export const removeeventfromclub = asynchandler(async (req, res) => {
     res.status(200).json(new ApiResponse(200, club, "Event removed from club successfully"));
 
 })
+
+
+
+export const getclubbyid = asynchandler(async (req, res) => {
+
+    const id = req.user.club;
+
+    console.log("id" , id);
+
+    const club = await Club.findById(id).populate("admin", "-password -refreshtoken");
+
+    if (!club) {
+        throw new ApiError(404, "Club not found");
+    }
+
+    res.status(200).json(new ApiResponse(200, club, "Club found"));
+})
+    
 

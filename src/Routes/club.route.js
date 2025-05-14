@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { addclub, getallclub } from "../controller/club.controller.js";
+import { addclub, getallclub, getclubbyid } from "../controller/club.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyjwt } from "../middlewares/auth.middleware.js";
 
@@ -14,8 +14,8 @@ router.route("/addclub").post(
      addclub);
 
 router.route('/getclub').get(
-     
-    getallclub
+     verifyjwt,
+     getclubbyid
 )
 
 export default router;
