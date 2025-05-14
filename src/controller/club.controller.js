@@ -28,7 +28,7 @@ export const addclub = asynchandler(async (req, res) => {
         throw new ApiError(400, "All fields (name, description, sociallink) are required");
     }
 
-    const file = req.file.buffer || null;
+    const file = req.file?.buffer || null;
 
     console.log( "req file ka andar" ,  file);
     
