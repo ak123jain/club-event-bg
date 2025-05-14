@@ -5,6 +5,8 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { json } from "express";
+import streamifier from 'streamifier';
+
  
 
 
@@ -114,8 +116,11 @@ export const createAdmin = asynchandler(async (req, res) => {
     if (existingUser) {
       throw new ApiError(409, "User with this email already exists");
     }
+
+     const buffer = Buffer.from(await avatar.arrayBuffer());
+
   
-    const avatar = await uploadOnCloudinary(req.file?.path);
+    const avatar = await uploadOnCloudinary(buffer);
 
     if (!avatar) {
       throw new ApiError(500, "Avatar upload failed");
@@ -211,7 +216,7 @@ export const getuserbyid = asynchandler(async (req, res) => {
 
   const userId =req.user._id;
 
-  
+
 
   const user = await User.findById(userId).select("-password -refreshToken");
 
