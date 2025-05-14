@@ -6,6 +6,11 @@ import { Club } from "../models/club.models.js";
 
 export const addclub = asynchandler(async (req, res) => {
 
+    console.log("from from add evnt" , req.body);
+    console.log("req user" , req.file);
+    
+    
+
 
     if (!req.user) {
         throw new ApiError(400, " userbis not logged in is required");
