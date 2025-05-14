@@ -9,7 +9,7 @@ const router = Router();
 router.post("/waitlist", createWaitlist);
  
 
-router.route("/admin").post(upload.single("avatar"),
+router.route("/admin").post( 
            createAdmin);
 
 router.route("/registeruser").post( 

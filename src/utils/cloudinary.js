@@ -71,7 +71,7 @@ cloudinary.config({
 
 
   // Upload image to Cloudinary with circular transformation
- export  const uploadAvatar = (buffer) => {
+ export  const uploadOnCloudinary = (buffer) => {
       return new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream({
           transformation: [
