@@ -18,7 +18,7 @@
        },
      eventphoto:{
          type : String,
-         required : true
+         required : false
      },
      startdate:{
          type : Date,

@@ -30,6 +30,9 @@ export const addclub = asynchandler(async (req, res) => {
 
     const file = req.file?.path || null;
 
+    console.log( "req file ka andar" ,  file);
+    
+
     const clubphoto = await uploadOnCloudinary(file);
 
     console.log("clubphoto", clubphoto);
