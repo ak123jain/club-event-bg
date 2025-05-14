@@ -10,9 +10,11 @@ router.post("/waitlist", createWaitlist);
  
 
 router.route("/admin").post( 
+            upload.single("avatar"),
            createAdmin);
 
 router.route("/registeruser").post( 
+            upload.single("avatar"),
             registeruser);          
 
 

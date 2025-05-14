@@ -117,7 +117,7 @@ export const createAdmin = asynchandler(async (req, res) => {
       throw new ApiError(409, "User with this email already exists");
     }
 
-     const buffer = Buffer.from(await avatar.arrayBuffer());
+     const buffer = Buffer.from(await req.file.arrayBuffer());
 
   
     const avatar = await uploadOnCloudinary(buffer);
