@@ -5,7 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { json } from "express";
-import streamifier from 'streamifier';
+ 
 
  
 
@@ -117,10 +117,16 @@ export const createAdmin = asynchandler(async (req, res) => {
       throw new ApiError(409, "User with this email already exists");
     }
 
-     const buffer = Buffer.from(await req.file.buffer);
+      
+      const path =  req.file.path
 
+      console.log("path" , path);
+      
   
-    const avatar = await uploadOnCloudinary(buffer);
+    const avatar = await uploadOnCloudinary(path );
+
+    console.log("avatar urll" , avatar);
+    
 
     if (!avatar) {
       throw new ApiError(500, "Avatar upload failed");
