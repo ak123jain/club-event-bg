@@ -19,17 +19,24 @@ export const addevent = asynchandler(async (req, res) => {
         throw new ApiError(400, "All fields (name, description, eventphoto , startdate , enddate) are required");
     }
 
-    const path = req.file?.path
+    // const path = req.file?.path
 
-    console.log("path" , path);
+    // console.log("path" , path);
 
-    if (!path) {
-      throw new ApiError(400, "eventphoto is required");
-    }
+    // if (!path) {
+    //   throw new ApiError(400, "eventphoto is required");
+    // }
 
+
+    const fileBuffer = req.file?.buffer;
+     console.log("fileBuffer", fileBuffer);
+
+if (!fileBuffer) {
+  throw new ApiError(400, "eventphoto is required");
+}
     
 
-    const eventphoto = await uploadOnCloudinary(path);
+    const eventphoto = await uploadOnCloudinary(fileBuffer);
 
     if (!eventphoto) {
         throw new ApiError(500, "eventphoto upload failed");
