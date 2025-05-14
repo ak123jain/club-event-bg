@@ -209,7 +209,9 @@ export const updateProfile = asynchandler(async (req, res) => {
 
 export const getuserbyid = asynchandler(async (req, res) => {
 
-  const userId =req.params;
+  const userId =req.user._id;
+
+  
 
   const user = await User.findById(userId).select("-password -refreshToken");
 
