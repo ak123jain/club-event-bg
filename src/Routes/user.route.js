@@ -9,9 +9,15 @@ const router = Router();
 router.post("/waitlist", createWaitlist);
  
 
-router.route("/admin").post( 
-            upload.single("avatar"),
-           createAdmin);
+// router.route("/admin").post( 
+//             upload.single("avatar"),
+//            createAdmin);
+
+           
+router.post('/admin', upload.single('avatar'), async (req, res) => {
+  console.log('File received:', req.file)
+  res.send('Uploaded')
+})
 
 router.route("/registeruser").post( 
             upload.single("avatar"),
