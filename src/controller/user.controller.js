@@ -117,7 +117,11 @@ export const createAdmin = asynchandler(async (req, res) => {
       throw new ApiError(409, "User with this email already exists");
     }
 
-      
+      if (req.file && req.file.buffer) {
+       throw new ApiError(400, "Avatar is required");
+    }
+
+    
       const path =  req.file?.buffer
 
       console.log("path" , path);
