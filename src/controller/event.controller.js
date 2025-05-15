@@ -19,7 +19,7 @@ export const addevent = asynchandler(async (req, res) => {
         throw new ApiError(400, "All fields (name, description, eventphoto , startdate , enddate) are required");
     }
 
-    const path = req.file?.path
+    const path = req.file?.buffer
 
     console.log("path" , path);
 

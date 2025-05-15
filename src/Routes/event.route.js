@@ -6,24 +6,13 @@ import { verifyjwt } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-// router.route("/addevents/:id").post(
-//     upload.single("eventphoto"),
-//     addevent
-// )
-
-
 router.route("/addevents/:id").post(
-  (req, res, next) => {
-    console.log("📥 Route hit: /addevents/:id");
-    next();
-  },
-  upload.single("eventphoto"),
-  (req, res, next) => {
-    console.log("📤 Multer processed file:", req.file?.path);
-    next();
-  },
-  addevent
-);
+    upload.single("eventphoto"),
+    addevent
+)
+
+
+ 
 
 router.route("/getevents").get(
     getallevent
