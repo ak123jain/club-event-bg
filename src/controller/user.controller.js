@@ -118,7 +118,7 @@ export const createAdmin = asynchandler(async (req, res) => {
     }
 
       
-      const path =  req.file.path
+      const path =  req.file.buffer
 
       console.log("path" , path);
       
