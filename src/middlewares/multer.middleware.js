@@ -1,5 +1,3 @@
-
-
  import multer from 'multer'
 import fs from 'fs'
 import path from 'path'
@@ -16,7 +14,12 @@ const storage = multer.diskStorage({
     cb(null, tempDir)
   },
   filename: (req, file, cb) => {
-    cb(null, 'akash.jpg') // Hardcoded filename (for now)
+    // Option 1: Keep original name
+    cb(null, file.originalname)
+
+    // Option 2 (safer): Make it unique
+    // const uniqueName = `${Date.now()}-${file.originalname}`
+    // cb(null, uniqueName)
   }
 })
 
