@@ -1,5 +1,4 @@
  import cloudinary from 'cloudinary'
-import streamifier from 'streamifier'
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -7,17 +6,16 @@ cloudinary.v2.config({
   api_secret: process.env.CLOUD_API_SECRET,
 })
 
-export const uploadOnCloudinary = (fileBuffer) => {
+// Upload directly from local file path
+export const uploadOnCloudinary = (filePath) => {
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.v2.uploader.upload_stream(
-      {
-        folder: 'avatars',
-      },
+    cloudinary.v2.uploader.upload(
+      filePath,
+      { folder: 'avatars' },
       (error, result) => {
         if (result) resolve(result)
         else reject(error)
       }
     )
-    streamifier.createReadStream(fileBuffer).pipe(uploadStream)
   })
 }
