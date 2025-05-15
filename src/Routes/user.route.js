@@ -17,6 +17,7 @@ router.post("/waitlist", createWaitlist);
 router.post('/admin', upload.single('avatar'), async (req, res) => {
   console.log('File received:', req.file)
   res.send('Uploaded')
+  createAdmin
 })
 
 router.route("/registeruser").post(
