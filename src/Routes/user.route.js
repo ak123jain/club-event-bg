@@ -19,7 +19,7 @@ router.post('/admin', upload.single('avatar'), async (req, res) => {
   res.send('Uploaded')
 })
 
-router.route("/registeruser").post( 
+router.route("/registeruser").post(
             upload.single("avatar"),
             registeruser);          
 
