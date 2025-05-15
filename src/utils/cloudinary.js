@@ -1,28 +1,23 @@
- 
+ import cloudinary from 'cloudinary'
+import streamifier from 'streamifier'
 
-import { v2 as cloudinary } from "cloudinary";
-import streamifier from "streamifier";
+cloudinary.v2.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_API_SECRET,
+})
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
-
-export const uploadOnCloudinary = (buffer) => {
+export const uploadOnCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
+    const uploadStream = cloudinary.v2.uploader.upload_stream(
       {
-        folder: "events", // optional
-        resource_type: "auto",
+        folder: 'avatars',
       },
       (error, result) => {
-        if (error) return reject(error);
-        resolve(result);
+        if (result) resolve(result)
+        else reject(error)
       }
-    );
-
-    streamifier.createReadStream(buffer).pipe(uploadStream);
-  });
-};
+    )
+    streamifier.createReadStream(fileBuffer).pipe(uploadStream)
+  })
+}

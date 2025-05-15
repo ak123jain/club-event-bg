@@ -108,6 +108,8 @@ export const registeruser = asynchandler(async (req, res) => {
 
 export const createAdmin = asynchandler(async (req, res) => {
 
+
+  console.log("🔥 Inside createAdmin");
   console.log("req.body", req.body);
   
   const { fullname, email, password , mobile } = req.body;
@@ -121,7 +123,7 @@ export const createAdmin = asynchandler(async (req, res) => {
        throw new ApiError(400, "Avatar is required");
     }
 
-    
+
       const path =  req.file?.buffer
 
       console.log("path" , path);
