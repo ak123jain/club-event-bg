@@ -77,7 +77,7 @@ export const registeruser = asynchandler(async (req, res) => {
   // 2. Check if user already exists
   const existingUser = await User.findOne({ email });
 
-  console.log("existingUser", existingUser);
+  console.log("existingUser 🤣🤣🤣🤣🤣", existingUser);
   
 
   if (existingUser) {
@@ -95,7 +95,7 @@ export const registeruser = asynchandler(async (req, res) => {
     Role: "user",
   });
 
-  console.log("newUser", newUser);
+  console.log("newUser 😊😊😊😊😊😊", newUser);
   
 
   
