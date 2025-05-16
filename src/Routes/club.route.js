@@ -13,9 +13,8 @@ router.route("/addclub").post(
     verifyjwt,
      addclub);
 
-router.route('/getclub').get(
-     verifyjwt,
-     getclubbyid
+router.route('/getclub').get( 
+     getallclub
 )
 
 export default router;
